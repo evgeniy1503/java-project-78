@@ -1,6 +1,12 @@
 plugins {
     id 'java'
     id 'checkstyle'
+    id 'com.adarshr.test-logger' version '3.2.0'
+    id 'jacoco'
+}
+
+compileJava {
+    options.release = 17
 }
 
 group 'hexlet.code'
@@ -11,10 +17,29 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+    testImplementation 'org.assertj:assertj-core:3.23.1'
 }
 
 test {
     useJUnitPlatform()
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
+}
+
+test {
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+}
+
+testlogger {
+    showStandardStreams true
 }
