@@ -2,21 +2,20 @@ package hexlet.code.schemas;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class StringSchema {
 
-    private List<String> substrings = new ArrayList<>();
-    private boolean contains = false;
-    private boolean isEmpty = true;
+    private static List<String> substrings = new ArrayList<>();
+    private static boolean contains = false;
+    private static boolean isEmpty = true;
 
 
 
 
 
-    public boolean isValid(String text) {
+    public static boolean isValid(String text) {
 
-        if (isEmpty && (text == null ||text.equals(""))) {
+        if (isEmpty && (text == null || text.equals(""))) {
             return true;
         }
 
@@ -35,11 +34,11 @@ public class StringSchema {
     }
 
 
-    public void required() {
-        this.isEmpty = false;
+    public static void required() {
+        isEmpty = false;
     }
 
-    public StringSchema contains(String str) {
+    public final StringSchema contains(String str) {
         contains = true;
         substrings.add(str);
         return this;
