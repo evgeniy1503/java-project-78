@@ -6,42 +6,52 @@ import java.util.List;
 public class StringSchema {
 
     private static List<String> substrings = new ArrayList<>();
-    private static boolean contains = false;
-    private static boolean isEmpty = true;
-
+    private static String validStatus = "Empty";
+    private static int minLength;
 
 
 
 
     public static boolean isValid(String text) {
 
-        if (isEmpty && (text == null || text.equals(""))) {
-            return true;
-        }
+        switch (validStatus) {
+            case "Empty":
+                return text == null || text.equals("");
 
-        if (!isEmpty && !text.isEmpty() && !contains) {
-            return true;
-        }
-        if (contains) {
-            for (String str : substrings) {
-                if (!text.contains(str)) {
-                    return false;
+            case "Required":
+                return !text.isEmpty();
+
+            case "Contains":
+                for (String str : substrings) {
+                    if (!text.contains(str)) {
+                        return false;
+                    }
                 }
                 return true;
-            }
+
+            case "Length":
+                return text.length() >= minLength;
+
+            default:
+                System.out.println("Invalid validation parameter");
         }
         return false;
     }
 
 
     public static void required() {
-        isEmpty = false;
+        validStatus = "Required";
     }
 
     public final StringSchema contains(String str) {
-        contains = true;
+        validStatus = "Contains";
         substrings.add(str);
         return this;
+    }
+
+    public final void minLength(int number) {
+        validStatus = "Length";
+        minLength = number;
     }
 
 }
