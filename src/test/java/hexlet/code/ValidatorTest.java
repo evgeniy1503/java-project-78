@@ -1,6 +1,6 @@
 package hexlet.code;
 
-//import hexlet.code.schemas.NumberSchema;
+import hexlet.code.schemas.NumberSchema;
 import hexlet.code.schemas.StringSchema;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -61,21 +61,27 @@ class ValidatorTest {
 
     }
 
-//    @Test
-//    public void testNumber() {
-//
-//        Validator v = new Validator();
-//        NumberSchema schema = v.number();
-//        var actual = schema.isValid(null);
-//        assertThat(actual).isTrue();
-//        schema.required();
-//        var actual2 = schema.isValid(null);
-//        assertThat(actual2).isFalse();
-//        var actual3 = schema.positive().isValid(10);
-//        assertThat(actual3).isTrue();
-//        var actual4 = schema.isValid(-10);
-//        assertThat(actual4).isFalse();
-//
-//
-//    }
+    @Test
+    public void testNumber() {
+
+        Validator v = new Validator();
+        NumberSchema schema = v.number();
+        var actual = schema.isValid(null);
+        assertThat(actual).isTrue();
+        schema.required();
+        var actual2 = schema.isValid(null);
+        assertThat(actual2).isFalse();
+        var actual3 = schema.positive().isValid(10);
+        assertThat(actual3).isTrue();
+        var actual4 = schema.isValid(-10);
+        assertThat(actual4).isFalse();
+        schema.range(5, 10);
+        var actual5 = schema.isValid(6);
+        assertThat(actual5).isTrue();
+        var actual6 = schema.isValid(12);
+        assertThat(actual6).isFalse();
+
+
+    }
+
 }
