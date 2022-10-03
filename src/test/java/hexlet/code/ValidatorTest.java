@@ -4,12 +4,12 @@ import hexlet.code.schemas.NumberSchema;
 import hexlet.code.schemas.StringSchema;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ValidatorTest {
 
     @Test
     public void testStringSchemaIsEmpty() {
-
         Validator v = new Validator();
         StringSchema schema = v.string();
         var actual = schema.isValid("");
@@ -20,7 +20,6 @@ class ValidatorTest {
     }
     @Test
     public void testStringSchema() {
-
         Validator v = new Validator();
         StringSchema schema = v.string();
         schema.required();
@@ -36,10 +35,8 @@ class ValidatorTest {
 
     @Test
     public void testStringSchemaContains() {
-
         Validator v = new Validator();
         StringSchema schema = v.string();
-        schema.required();
         var actual = schema.contains("what").isValid("what does the fox say");
         assertThat(actual).isTrue();
         var actual2 = schema.contains("wh").isValid("what does the fox say");
@@ -48,8 +45,7 @@ class ValidatorTest {
     }
 
     @Test
-    public void testStringSchemaLeLength() {
-
+    public void testStringSchemaLength() {
         Validator v = new Validator();
         StringSchema schema = v.string();
         schema.required();
@@ -62,12 +58,17 @@ class ValidatorTest {
     }
 
     @Test
-    public void testNumber() {
-
+    public void testNumberEmpty() {
         Validator v = new Validator();
         NumberSchema schema = v.number();
         var actual = schema.isValid(null);
-        assertThat(actual).isTrue();
+        assertTrue(actual, "Error");
+    }
+
+    @Test
+    public void testNumbers() {
+        Validator v = new Validator();
+        NumberSchema schema = v.number();
         schema.required();
         var actual2 = schema.isValid(null);
         assertThat(actual2).isFalse();

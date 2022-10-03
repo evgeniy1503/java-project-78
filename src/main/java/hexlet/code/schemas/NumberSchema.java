@@ -1,44 +1,32 @@
 package hexlet.code.schemas;
 
 
-public class NumberSchema {
+import java.util.Objects;
+import java.util.function.Predicate;
 
-    private static String validStatus = "Empty";
+public class NumberSchema extends BaseSchema {
 
-    private static int rangeFrom;
-
-    private static int rangeTo;
-
-    public static boolean isValid(Integer number) {
-
-        switch (validStatus) {
-            case "Empty":
-                return number == null;
-            case "Required":
-                return number != null;
-            case "Positive":
-                return number > 0;
-            case "Range":
-                return rangeFrom <= number && number <= rangeTo;
-            default:
-                System.out.println("Invalid validation parameter");
-        }
-        return false;
+    public NumberSchema() {
+        clearValidList();
     }
 
-    public static void required() {
-        validStatus = "Required";
+    public final void required() {
+        clearValidList();
+        Predicate<Integer> required = Objects::nonNull;
+        addValid(required);
     }
 
     public final NumberSchema positive() {
-        validStatus = "Positive";
+        clearValidList();
+        Predicate<Integer> positive = x -> x > 0;
+        addValid(positive);
         return this;
     }
 
     public final void range(int from, int to) {
-        rangeFrom = from;
-        rangeTo = to;
-        validStatus = "Range";
+        clearValidList();
+        Predicate<Integer> range = x -> from <= x && x <= to;
+        addValid(range);
     }
 
 
