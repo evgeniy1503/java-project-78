@@ -71,14 +71,14 @@ class ValidatorTest {
         schema.required();
         var actual2 = schema.isValid(null);
         assertThat(actual2).isFalse();
-        var actual3 = schema.positive().isValid(10);
+        var actual3 = schema.positive().isValid(1);
         assertThat(actual3).isTrue();
-        var actual4 = schema.isValid(-10);
+        var actual4 = schema.isValid(-1);
         assertThat(actual4).isFalse();
-        schema.range(5, 10);
-        var actual5 = schema.isValid(6);
+        schema.range(-1, 1);
+        var actual5 = schema.isValid(0);
         assertThat(actual5).isTrue();
-        var actual6 = schema.isValid(12);
+        var actual6 = schema.isValid(2);
         assertThat(actual6).isFalse();
 
 
