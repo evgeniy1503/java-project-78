@@ -12,7 +12,7 @@ public class NumberSchema extends BaseSchema {
 
     public final void required() {
         clearValidList();
-        Predicate<Integer> required = Objects::nonNull;
+        Predicate required = obj -> Objects.nonNull(obj) && obj instanceof Integer;
         addValid(required);
     }
 
