@@ -17,7 +17,7 @@ run:
 	./gradlew run
 
 install:
-	./gradlew clean installDist
+	./gradlew clean install
 
 report:
 	./gradlew jacocoTestReport
