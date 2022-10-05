@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import hexlet.code.schemas.BaseSchema;
 import hexlet.code.schemas.MapSchema;
 import hexlet.code.schemas.NumberSchema;
 import hexlet.code.schemas.StringSchema;
@@ -143,6 +144,37 @@ class ValidatorTest {
         data.put("key2", "value2");
         var actual6 = schema.isValid(data);
         assertThat(actual6).isTrue();
+
+    }
+
+    @Test
+    public void testMapSchemaShape() {
+
+        Validator v = new Validator();
+        MapSchema schema = v.map();
+
+        Map<String, BaseSchema> schemas = new HashMap<>();
+        schemas.put("name", v.string().required());
+        schemas.put("age", v.number().positive());
+        schema.shape(schemas);
+
+        Map<String, Object> human1 = new HashMap<>();
+        human1.put("name", "Kolya");
+        human1.put("age", 1);
+        var actual = schema.isValid(human1);
+        assertThat(actual).isTrue();
+
+        Map<String, Object> human2 = new HashMap<>();
+        human2.put("name", "Maya");
+        human2.put("age", null);
+        var actual2 = schema.isValid(human2);
+        assertThat(actual2).isTrue();
+
+        Map<String, Object> human3 = new HashMap<>();
+        human3.put("name", "");
+        human3.put("age", null);
+        var actual3 = schema.isValid(human3);
+        assertThat(actual3).isFalse();
     }
 
 }

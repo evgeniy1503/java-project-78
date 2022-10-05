@@ -10,10 +10,11 @@ public class StringSchema extends BaseSchema {
         clearValidList();
     }
 
-    public final void required() {
+    public final StringSchema required() {
         clearValidList();
         Predicate<String> required = x -> x != null && !x.equals("");
         addValid(required);
+        return this;
     }
 
     public final StringSchema contains(String str) {
