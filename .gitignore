@@ -5,4 +5,6 @@ app/.gradle
 build
 
 # Ignore IDEA files
-.idea
+.idea/
+# Ignore Gradle project-specific cache directory
+.gradle
