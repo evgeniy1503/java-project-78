@@ -26,53 +26,32 @@ class ValidatorTest {
         var actual2 = schema.isValid(null);
         assertThat(actual2).isTrue();
 
-    }
-    @Test
-    public void testStringSchema() {
-
-        Validator v = new Validator();
-        StringSchema schema = v.string();
-
         schema.required();
-        var actual = schema.isValid("what does the fox say");
-        assertThat(actual).isTrue();
-
-        var actual2 = schema.isValid("");
-        assertThat(actual2).isFalse();
-
-        schema.minLength(2);
-        var actual3 = schema.isValid("Evgeniy");
+        var actual3 = schema.isValid("what does the fox say");
         assertThat(actual3).isTrue();
 
-    }
+        var actual4 = schema.isValid("");
+        assertThat(actual4).isFalse();
 
-    @Test
-    public void testStringSchemaContains() {
-
-        Validator v = new Validator();
-        StringSchema schema = v.string();
-
-        var actual = schema.contains("what").isValid("what does the fox say");
-        assertThat(actual).isTrue();
-
-        var actual2 = schema.contains("wh").isValid("what does the fox say");
-        assertThat(actual2).isTrue();
-
-    }
-
-    @Test
-    public void testStringSchemaLength() {
-
-        Validator v = new Validator();
-        StringSchema schema = v.string();
-
-        schema.required();
         schema.minLength(2);
-        var actual = schema.isValid("Hello, World");
-        assertThat(actual).isTrue();
+        var actual5 = schema.isValid("Evgeniy");
+        assertThat(actual5).isTrue();
 
-        var actual2 = schema.isValid("H");
-        assertThat(actual2).isFalse();
+        var actual6 = schema.contains("what").isValid("what does the fox say");
+        assertThat(actual6).isTrue();
+
+        var actual7 = schema.contains("wh").isValid("what does the fox say");
+        assertThat(actual7).isTrue();
+
+        var actual9 = schema.contains("whatthe").isValid("what does the fox say");
+        assertThat(actual9).isFalse();
+
+        schema.minLength(2);
+        var actual8 = schema.isValid("Hello, World");
+        assertThat(actual8).isTrue();
+
+        var actual10 = schema.isValid("H");
+        assertThat(actual10).isFalse();
 
     }
 

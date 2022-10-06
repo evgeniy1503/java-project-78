@@ -16,9 +16,8 @@ public abstract class BaseSchema {
             if (!predicate.test(obj)) {
                 return false;
             }
-            return true;
         }
-        return false;
+        return true;
     }
 
     public final void addValid(Predicate p) {
