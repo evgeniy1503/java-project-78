@@ -5,27 +5,24 @@ import java.util.function.Predicate;
 
 public class StringSchema extends BaseSchema {
 
-
     public StringSchema() {
-        clearValidList();
+        addValid(x -> x instanceof String);
     }
-
     public final StringSchema required() {
-        clearValidList();
-        Predicate<String> required = x -> x != null && !x.equals("");
+        Predicate<String> required = x -> !x.isEmpty();
         addValid(required);
+        setRequired(true);
         return this;
     }
 
     public final StringSchema contains(String str) {
-        Predicate<String> contains = x -> x != null && x.contains(str);
+        Predicate<String> contains = x -> x.contains(str);
         addValid(contains);
         return this;
     }
 
     public final void minLength(int number) {
-        clearValidList();
-        Predicate<String> minLength = x -> x != null && x.length() >= number;
+        Predicate<String> minLength = x -> x.length() >= number;
         addValid(minLength);
     }
 

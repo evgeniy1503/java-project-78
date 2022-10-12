@@ -1,30 +1,23 @@
 package hexlet.code.schemas;
 
-
-import java.util.Objects;
 import java.util.function.Predicate;
 
 public class NumberSchema extends BaseSchema {
 
     public NumberSchema() {
-        clearValidList();
+        addValid(x -> x instanceof Integer);
     }
-
     public final void required() {
-        clearValidList();
-        Predicate required = obj -> Objects.nonNull(obj) && obj instanceof Integer;
-        addValid(required);
+        setRequired(true);
     }
 
     public final NumberSchema positive() {
-        clearValidList();
-        Predicate<Integer> positive = x -> x > 0;
+        Predicate<Integer> positive = x -> (x == null || x > 0);
         addValid(positive);
         return this;
     }
 
     public final void range(int from, int to) {
-        clearValidList();
         Predicate<Integer> range = x -> from <= x && x <= to;
         addValid(range);
     }

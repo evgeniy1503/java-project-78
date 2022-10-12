@@ -8,15 +8,28 @@ public abstract class BaseSchema {
 
     private final List<Predicate> validList = new ArrayList<>();
 
+
+    private boolean isRequired = false;
+
     public final boolean isValid(Object obj) {
-        if (obj == null || obj.equals("")) {
-            return validList.size() == 0;
+
+        if (!isRequired && obj == null) {
+            return true;
         }
-        for (Predicate predicate : validList) {
-            if (!predicate.test(obj)) {
-                return false;
+
+        if (isRequired && obj == null) {
+            return false;
+        }
+
+        if (!validList.isEmpty()) {
+            for (Predicate predicate : validList) {
+                if (!predicate.test(obj)) {
+                    return false;
+
+                }
             }
         }
+
         return true;
     }
 
@@ -24,8 +37,9 @@ public abstract class BaseSchema {
         validList.add(p);
     }
 
-    public final void clearValidList() {
-        validList.clear();
+
+    public final void setRequired(boolean required) {
+        this.isRequired = required;
     }
 
 }

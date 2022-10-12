@@ -5,40 +5,36 @@ import java.util.function.Predicate;
 
 public class MapSchema extends BaseSchema {
 
+
     public MapSchema() {
-        clearValidList();
+        addValid(x -> x instanceof Map<?, ?>);
     }
-
     public final void required() {
-        clearValidList();
-        Predicate required = x -> x instanceof Map;
-        addValid(required);
+        setRequired(true);
     }
 
 
 
-    public final void sizeof(int pair) {
-        clearValidList();
-        Predicate<Map> sizeof = x -> x.size()  == pair;
+    public final void sizeof(int size) {
+        Predicate<Map> sizeof = x -> x.size()  == size;
         addValid(sizeof);
     }
 
     public final MapSchema shape(Map<String, BaseSchema> map) {
-        clearValidList();
-        Predicate<Map> shape = x -> checkValid(map, x);
+        Predicate<Map> shape = x -> checkValid(x, map);
         addValid(shape);
         return this;
     }
 
-    public final boolean checkValid(Map<String, BaseSchema> map, Map<String, String> data) {
+    public final boolean checkValid(Map<String, String> data, Map<String, BaseSchema> map) {
 
         for (Map.Entry<String, BaseSchema> item : map.entrySet()) {
             String key = item.getKey();
-            BaseSchema value = item.getValue();
-            String dataValue = data.get(key);
-            return value.isValid(dataValue);
+            if (data.containsKey(key) && !(item.getValue().isValid(data.get(key)))) {
+                return false;
+            }
 
         }
-        return false;
+        return true;
     }
 }
