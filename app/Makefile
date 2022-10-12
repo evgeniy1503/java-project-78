@@ -1,5 +1,5 @@
 run-dist: #запуск программы
-	./build/install/app/bin/app
+	./build/install/app/bin/
 
 test:
 	./gradlew test
@@ -13,8 +13,6 @@ lint:
 build:
 	./gradlew clean build
 
-run:
-	./gradlew run
 
 install:
 	./gradlew clean install
