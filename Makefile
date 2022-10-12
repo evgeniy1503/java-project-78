@@ -1,8 +1,3 @@
-.DEFAULT_GOAL := build-run
-
-run-dist: #запуск программы
-	./build/install/app/bin/app
-
 test:
 	make -C app test
 
@@ -15,13 +10,12 @@ lint:
 build:
 	make -C app build
 
-run:
-	make -C app run
-
 install:
-	make -C app clean install
+	make -C app install
 
 report:
 	make -C app report
+
+build-run: build
 
 .PHONY: build
