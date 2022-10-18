@@ -21,12 +21,10 @@ public abstract class BaseSchema {
             return false;
         }
 
-        if (!validList.isEmpty()) {
-            for (Predicate predicate : validList) {
-                if (!predicate.test(obj)) {
-                    return false;
+        for (Predicate predicate : validList) {
+            if (!predicate.test(obj)) {
+                return false;
 
-                }
             }
         }
 

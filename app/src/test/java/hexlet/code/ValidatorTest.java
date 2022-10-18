@@ -20,7 +20,7 @@ class ValidatorTest {
     public static final int NUMBER_FIVE = 5;
 
     @Test
-    public void testStringSchemaIsEmpty() {
+    public void testString() {
 
         Validator v = new Validator();
         StringSchema schema = v.string();

@@ -5,11 +5,9 @@ import java.util.function.Predicate;
 
 public class StringSchema extends BaseSchema {
 
-    public StringSchema() {
-        addValid(x -> x instanceof String);
-    }
+
     public final StringSchema required() {
-        Predicate<String> required = x -> !x.isEmpty();
+        Predicate required = x -> x instanceof String && !((String) x).isEmpty();
         addValid(required);
         setRequired(true);
         return this;
