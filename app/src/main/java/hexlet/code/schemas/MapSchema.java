@@ -10,8 +10,9 @@ public class MapSchema extends BaseSchema {
         addValid(x -> x instanceof Map<?, ?>);
     }
 
-    public final void required() {
+    public final MapSchema required() {
         setRequired(true);
+        return this;
     }
 
 

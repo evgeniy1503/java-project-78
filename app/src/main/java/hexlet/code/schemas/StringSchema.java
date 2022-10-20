@@ -6,12 +6,10 @@ import java.util.function.Predicate;
 public class StringSchema extends BaseSchema {
 
     public StringSchema() {
-        addValid(x -> x instanceof String);
+        addValid(x -> x instanceof String && !((String) x).isEmpty());
     }
 
     public final StringSchema required() {
-        Predicate<String> required = x -> x != null && !(x.isEmpty());
-        addValid(required);
         setRequired(true);
         return this;
     }
