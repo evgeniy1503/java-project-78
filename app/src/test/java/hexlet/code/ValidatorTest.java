@@ -62,7 +62,6 @@ class ValidatorTest {
     @Test
     public void testNumber() {
 
-
         Validator v = new Validator();
         NumberSchema schema = v.number();
 
@@ -71,6 +70,7 @@ class ValidatorTest {
 
         var actual2 = schema.isValid(null);
         assertThat(actual2).isTrue();
+
 
         var actual3 = schema.positive().isValid(null);
         assertThat(actual3).isTrue();
@@ -176,6 +176,7 @@ class ValidatorTest {
         human3.put("age", -1);
         var actual4 = schema.isValid(human3);
         assertThat(actual4).isFalse();
+
     }
 
 }

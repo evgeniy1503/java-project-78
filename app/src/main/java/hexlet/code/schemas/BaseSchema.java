@@ -32,12 +32,16 @@ public abstract class BaseSchema {
     }
 
     public final void addValid(Predicate p) {
+
         validList.add(p);
+
     }
 
 
     public final void setRequired(boolean required) {
+
         this.isRequired = required;
+
     }
 
 }
